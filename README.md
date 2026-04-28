@@ -12,7 +12,7 @@ The Coding Journey is a platform dedicated to empowering aspiring developers.
 From beginner tutorials to advanced programming concepts, we provide a complete learning experience to help you master coding, build real-world projects, and grow your tech career.
 
 ---
-
+🔗 **Live Demo:** (https://react-project-coding-journey.vercel.app/)
 ## 🌐 Features
 
 ### 🏠 Home
