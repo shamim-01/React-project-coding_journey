@@ -1,35 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { motion } from 'framer-motion';
 
 const NavbarMenu = [
-  {
-    id: 1,
-    title: 'Home',
-    link: '#home',
-  },
-  {
-    id: 2,
-    title: 'About',
-    link: '#about',
-  },
-  {
-    id: 3,
-    title: 'Blog',
-    link: '#blog',
-  },
-  {
-    id: 4,
-    title: 'Services',
-    link: '#services',
-  },
-  {
-    id: 5,
-    title: 'Contact Us',
-    link: '#subscribe',
-  },
+  { id: 1, title: 'Home', link: '#home' },
+  { id: 2, title: 'About', link: '#about' },
+  { id: 3, title: 'Blog', link: '#blog' },
+  { id: 4, title: 'Services', link: '#services' },
+  { id: 5, title: 'Contact Us', link: '#subscribe' },
 ];
+
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className="relative z-20">
       <motion.div
@@ -37,11 +20,15 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         className="container py-10 flex justify-between items-center"
       >
-        {/* Logo section */}
+
+        {/* Logo */}
         <div>
-          <h1 className="font-bold text-2xl">The Coding Journey</h1>
+          <h1 className="font-bold text-2xl">
+            The Coding Journey
+          </h1>
         </div>
-        {/* Menu section */}
+
+        {/* Desktop Menu */}
         <div className="hidden lg:block">
           <ul className="flex items-center gap-3">
             {NavbarMenu.map(menu => (
@@ -50,7 +37,6 @@ const Navbar = () => {
                   href={menu.link}
                   className="inline-block py-2 px-3 hover:text-secondary relative group"
                 >
-                  <div className="w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden"></div>
                   {menu.title}
                 </a>
               </li>
@@ -58,11 +44,34 @@ const Navbar = () => {
             <button className="primary-btn">Sign In</button>
           </ul>
         </div>
-        {/* Mobile Hamburger menu section */}
+
+        {/* Mobile Icon */}
         <div className="lg:hidden">
-          <IoMdMenu className="text-4xl" />
+          <IoMdMenu
+            className="text-4xl cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          />
         </div>
       </motion.div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-white shadow-md px-6 py-4">
+          <ul className="flex flex-col gap-4">
+            {NavbarMenu.map(menu => (
+              <li key={menu.id}>
+                <a
+                  href={menu.link}
+                  onClick={() => setIsOpen(false)}
+                  className="block py-2 hover:text-secondary"
+                >
+                  {menu.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
